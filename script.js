@@ -1,7 +1,7 @@
 class QuranSlider {
     constructor() {
         this.currentPage = 1;
-        this.totalPages = 604;
+        this.totalPages = 604; // Will be updated dynamically based on image array size
         this.zoomLevel = 1;
         this.minZoom = 0.5;
         this.maxZoom = 3;
@@ -63,6 +63,13 @@ class QuranSlider {
         this.goToPageBtn = document.getElementById('goToPage');
         this.touchInstructions = document.getElementById('touchInstructions');
         
+        // New enhanced control elements
+        this.currentPageDisplay = document.getElementById('currentPageDisplay');
+        this.totalPagesDisplay = document.getElementById('totalPagesDisplay');
+        this.firstPageBtn = document.getElementById('firstPage');
+        this.lastPageBtn = document.getElementById('lastPage');
+        this.fullscreenBtn = document.getElementById('fullscreen');
+        
         // Debug: Check if all elements exist
         const requiredElements = {
             imageContainer: this.imageContainer,
@@ -76,7 +83,12 @@ class QuranSlider {
             zoomLevelDisplay: this.zoomLevelDisplay,
             pageInput: this.pageInput,
             goToPageBtn: this.goToPageBtn,
-            touchInstructions: this.touchInstructions
+            touchInstructions: this.touchInstructions,
+            currentPageDisplay: this.currentPageDisplay,
+            totalPagesDisplay: this.totalPagesDisplay,
+            firstPageBtn: this.firstPageBtn,
+            lastPageBtn: this.lastPageBtn,
+            fullscreenBtn: this.fullscreenBtn
         };
         
         const missingElements = [];
@@ -98,8 +110,27 @@ class QuranSlider {
         // You can replace these with your actual Quran page image URLs
         this.imageUrls = this.createQuranImageArray();
         
+        // Update total pages based on actual image array size
+        this.totalPages = this.imageUrls.length;
+        this.updateTotalPagesUI();
+        
         this.loadCurrentImage();
         this.preloadAdjacentImages();
+    }
+    
+    // Update total pages in UI elements
+    updateTotalPagesUI() {
+        // Set total pages in the display
+        if (this.totalPagesDisplay) {
+            this.totalPagesDisplay.textContent = this.totalPages;
+        }
+        
+        // Update page input max attribute
+        if (this.pageInput) {
+            this.pageInput.setAttribute('max', this.totalPages);
+        }
+        
+        console.log(`Total pages updated to: ${this.totalPages} (based on image array size)`);
     }
 
     
@@ -265,6 +296,19 @@ class QuranSlider {
             if (e.key === 'Enter') this.goToPage();
         });
         
+        // New enhanced controls
+        if (this.firstPageBtn) {
+            this.firstPageBtn.addEventListener('click', () => this.goToFirstPage());
+        }
+        
+        if (this.lastPageBtn) {
+            this.lastPageBtn.addEventListener('click', () => this.goToLastPage());
+        }
+        
+        if (this.fullscreenBtn) {
+            this.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
+        }
+        
         // Mouse events for dragging
         this.imageContainer.addEventListener('mousedown', (e) => this.handleMouseDown(e));
         document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
@@ -389,6 +433,9 @@ class QuranSlider {
         this.currentImage.src = src;
         this.currentImage.style.display = 'block';
         
+        // Update page display
+        this.updatePageDisplay();
+        
         // Add load event listener to ensure image is displayed
         this.currentImage.onload = () => {
             console.log('Image displayed successfully');
@@ -400,6 +447,14 @@ class QuranSlider {
         };
         
         this.preloadAdjacentImages();
+    }
+    
+    // Update page display in controls
+    updatePageDisplay() {
+        if (this.currentPageDisplay) {
+            this.currentPageDisplay.textContent = this.currentPage;
+        }
+        console.log(`Page display updated to: ${this.currentPage}`);
     }
     
     preloadAdjacentImages() {
@@ -453,6 +508,43 @@ class QuranSlider {
             this.currentPage = pageNum;
             this.loadCurrentImage();
             this.pageInput.value = '';
+        }
+    }
+    
+    // Go to first page
+    goToFirstPage() {
+        this.currentPage = 1;
+        this.loadCurrentImage();
+        console.log('Navigated to first page');
+    }
+    
+    // Go to last page
+    goToLastPage() {
+        this.currentPage = this.totalPages;
+        this.loadCurrentImage();
+        console.log('Navigated to last page');
+    }
+    
+    // Toggle fullscreen mode
+    toggleFullscreen() {
+        try {
+            if (!document.fullscreenElement) {
+                // Enter fullscreen
+                document.documentElement.requestFullscreen().then(() => {
+                    console.log('Entered fullscreen mode');
+                }).catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                // Exit fullscreen
+                document.exitFullscreen().then(() => {
+                    console.log('Exited fullscreen mode');
+                }).catch(err => {
+                    console.log(`Error attempting to exit fullscreen: ${err.message}`);
+                });
+            }
+        } catch (error) {
+            console.error('Fullscreen not supported or error occurred:', error);
         }
     }
     
