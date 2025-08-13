@@ -299,6 +299,24 @@ class QuranSlider {
         // Add change event listener for pageInput
         this.pageInput.addEventListener('change', () => this.goToPage());
         
+        // Controls toggle functionality
+        this.controlsToggle = document.getElementById('controlsToggle');
+        this.controlsGroup = document.getElementById('controlsGroup');
+        this.controls = document.querySelector('.controls');
+        
+        if (this.controlsToggle && this.controlsGroup) {
+            this.controlsToggle.addEventListener('click', () => this.toggleControls());
+            
+            // Close controls when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!this.controls.contains(e.target) && 
+                    !this.controlsToggle.contains(e.target) && 
+                    this.controls.classList.contains('show')) {
+                    this.toggleControls();
+                }
+            });
+        }
+        
         // New enhanced controls
         if (this.firstPageBtn) {
             this.firstPageBtn.addEventListener('click', () => this.goToFirstPage());
@@ -753,6 +771,25 @@ class QuranSlider {
                 }
                 e.preventDefault();
                 break;
+        }
+    }
+    
+    // Toggle controls visibility
+    toggleControls() {
+        if (this.controls && this.controlsToggle) {
+            const isVisible = this.controls.classList.contains('show');
+            
+            if (isVisible) {
+                // Hide controls
+                this.controls.classList.remove('show');
+                this.controlsToggle.classList.remove('active');
+                console.log('Controls hidden');
+            } else {
+                // Show controls
+                this.controls.classList.add('show');
+                this.controlsToggle.classList.add('active');
+                console.log('Controls shown');
+            }
         }
     }
 }

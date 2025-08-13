@@ -22,7 +22,7 @@ body {
 }
 
 .container {
-    height: 95vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -150,24 +150,171 @@ body {
     left: -25px;
 }
 
-/* Enhanced Controls - Mobile Bottom Navigation Bar */
+/* ======================================
+   FLOATING TOGGLE BUTTON
+   ====================================== */
+.floating-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #fff;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3), 
+                0 4px 16px rgba(0, 0, 0, 0.2);
+    z-index: calc(var(--z-controls) + 1);
+    will-change: transform;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Click ripple effect */
+.floating-toggle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-toggle:active::before {
+    width: 120px;
+    height: 120px;
+}
+
+/* SVG icon */
+.floating-toggle svg {
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.floating-toggle:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4), 
+                0 8px 24px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+}
+
+.floating-toggle:hover svg {
+    transform: scale(1.1);
+}
+
+.floating-toggle:active {
+    transform: scale(0.9) translateY(0);
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+    transition: all 0.15s ease;
+}
+
+.floating-toggle:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 4px;
+    border-radius: 22px;
+}
+
+/* Floating button animation when controls are shown */
+.floating-toggle.active {
+    transform: rotate(45deg) scale(1.05);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    box-shadow: 0 8px 32px rgba(255, 107, 107, 0.4), 
+                0 4px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.floating-toggle.active:hover {
+    transform: rotate(45deg) scale(1.15) translateY(-2px);
+    background: linear-gradient(135deg, #ee5a24 0%, #ff6b6b 100%);
+    box-shadow: 0 12px 40px rgba(255, 107, 107, 0.5), 
+                0 8px 24px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+}
+
+.floating-toggle.active:active {
+    transform: rotate(45deg) scale(0.95);
+}
+
+/* Pulse animation on first load */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3), 
+                    0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        box-shadow: 0 8px 32px rgba(102, 126, 234, 0.6), 
+                    0 4px 16px rgba(0, 0, 0, 0.2),
+                    0 0 0 10px rgba(102, 126, 234, 0.1);
+    }
+    100% {
+        box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3), 
+                    0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.floating-toggle:not(.active) {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* ======================================
+   ENHANCED CONTROLS - MOBILE NAVIGATION BAR
+   ====================================== */
 .controls {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(15, 20, 25, 0.98);
+    background: var(--glass-bg);
     backdrop-filter: blur(20px);
-    padding: 16px 20px 24px 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--glass-border);
     box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.4);
-    z-index: 1000;
-    min-height: 85px;
-    gap: 12px;
+    z-index: var(--z-controls);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    will-change: transform;
+    transform: translateY(100%);
+    transition: transform var(--transition-normal);
+    pointer-events: none;
+}
+
+.controls.show {
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Controls Group */
+.controls-group {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-md);
+    align-items: center;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
 .control-section {
@@ -435,7 +582,12 @@ body {
 
 /* Tablet Styles */
 @media (max-width: 1024px) {
- 
+    .floating-toggle {
+        width: 55px;
+        height: 55px;
+        bottom: 16px;
+        right: 16px;
+    }
     
     .controls {
         padding: 10px 12px 16px 12px;
@@ -464,7 +616,12 @@ body {
 
 /* Mobile Styles */
 @media (max-width: 768px) {
-   
+    .floating-toggle {
+        width: 50px;
+        height: 50px;
+        bottom: 12px;
+        right: 12px;
+    }
     
     .nav-arrow {
         width: 40px;
@@ -642,9 +799,9 @@ body {
 
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
-    body {
+    /* body {
         background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
-    }
+    } */
     
     .header {
         background: rgba(15, 20, 25, 0.95);
