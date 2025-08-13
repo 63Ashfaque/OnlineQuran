@@ -2,6 +2,8 @@
 
 https://63ashfaque.github.io/OnlineQuran/
 
+https://onlinequran-7fn.pages.dev/
+
 
 A modern, responsive web application for viewing Quran pages with advanced features including zoom, touch navigation, and lazy loading.
 
