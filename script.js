@@ -666,11 +666,12 @@ class QuranSlider {
             const deltaX = touch.clientX - this.touchStartX;
             
             if (deltaX > 50) {
-                // Swipe right - previous page (RTL)
-                this.previousPage();
+                
+                     this.nextPage();
             } else if (deltaX < -50) {
-                // Swipe left - next page (RTL)
-                this.nextPage();
+              
+                 this.previousPage();
+          
             }
         }
         
