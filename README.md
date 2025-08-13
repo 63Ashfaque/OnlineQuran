@@ -1,5 +1,8 @@
 # Online Quran Slider - القرآن الكريم
 
+https://63ashfaque.github.io/OnlineQuran/
+
+
 A modern, responsive web application for viewing Quran pages with advanced features including zoom, touch navigation, and lazy loading.
 
 ## Features
