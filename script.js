@@ -296,6 +296,9 @@ class QuranSlider {
             if (e.key === 'Enter') this.goToPage();
         });
         
+        // Add change event listener for pageInput
+        this.pageInput.addEventListener('change', () => this.goToPage());
+        
         // New enhanced controls
         if (this.firstPageBtn) {
             this.firstPageBtn.addEventListener('click', () => this.goToFirstPage());
