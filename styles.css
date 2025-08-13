@@ -433,9 +433,7 @@ body {
 
 /* Tablet Styles */
 @media (max-width: 1024px) {
-    .slider-container {
-        padding: 15px 15px 100px;
-    }
+ 
     
     .controls {
         padding: 10px 12px 16px 12px;
@@ -464,9 +462,7 @@ body {
 
 /* Mobile Styles */
 @media (max-width: 768px) {
-    .slider-container {
-        padding: 10px 10px 90px;
-    }
+   
     
     .nav-arrow {
         width: 40px;
@@ -535,9 +531,7 @@ body {
 
 /* Small Mobile Styles */
 @media (max-width: 480px) {
-    .slider-container {
-        padding: 5px 5px 80px;
-    }
+   
     
     .nav-arrow {
         width: 36px;
@@ -606,9 +600,7 @@ body {
 
 /* Landscape Mobile */
 @media (max-height: 500px) and (orientation: landscape) {
-    .slider-container {
-        padding: 10px 10px 70px;
-    }
+   
     
     .controls {
         padding: 4px 8px 8px 8px;

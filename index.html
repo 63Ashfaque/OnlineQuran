@@ -41,52 +41,7 @@
 
         <!-- Enhanced Controls -->
         <div class="controls">
-            <!-- Navigation Section -->
-            <div class="control-section page-controls">
-            
-                <div class="control-group">
-                    <div class="page-input-group">
-                        <input type="number" class="page-input" id="pageInput" min="1" max="840" placeholder="Page" title="Go to page">
-                        <button class="control-btn go-to-page" id="goToPage" aria-label="Go to page" title="Go">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <line x1="22" y1="2" x2="11" y2="13"></line>
-                                <polygon points="22,2 15,21 11,13 2,9 22,2"></polygon>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="page-info-display">
-                        <span class="current-page-display" id="currentPageDisplay">1</span>
-                        <span class="page-separator">/</span>
-                        <span class="total-pages-display" id="totalPagesDisplay">848</span>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Actions Section -->
-            <div class="control-section quick-actions">
-              
-                <div class="control-group">
-                    <button class="control-btn action-btn" id="firstPage" aria-label="First page" title="First page (Home)">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                            <polyline points="9,22 9,12 15,12 15,22"></polyline>
-                        </svg>
-                    </button>
-                    <button class="control-btn action-btn" id="lastPage" aria-label="Last page" title="Last page (End)">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                            <polyline points="16,17 21,12 16,7"></polyline>
-                            <line x1="21" y1="12" x2="9" y2="12"></line>
-                        </svg>
-                    </button>
-                    <button class="control-btn action-btn" id="fullscreen" aria-label="Fullscreen" title="Fullscreen (F11)">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            
             <!-- Zoom Section -->
             <div class="control-section zoom-controls">
              
@@ -115,6 +70,56 @@
                     </button>
                 </div>
             </div>
+
+
+            <!-- Navigation Section -->
+            <div class="control-section page-controls">
+            
+                <div class="control-group">
+                     <div class="page-info-display">
+                        <span class="current-page-display" id="currentPageDisplay">1</span>
+                        <span class="page-separator">/</span>
+                        <span class="total-pages-display" id="totalPagesDisplay">848</span>
+                    </div>
+                    <div class="page-input-group">
+                        <button class="control-btn go-to-page" id="goToPage" aria-label="Go to page" title="Go">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22,2 15,21 11,13 2,9 22,2"></polygon>
+                            </svg>
+                        </button>
+                        <input type="number" class="page-input" id="pageInput" min="1" max="840" placeholder="Page" title="Go to page">
+                    </div>
+                   
+                </div>
+            </div>
+
+            <!-- Actions Section -->
+            <div class="control-section quick-actions">
+              
+                <div class="control-group">
+                    <button class="control-btn action-btn" id="firstPage" aria-label="First page" title="First page (Home)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                        </svg>
+                    </button>
+                    <button class="control-btn action-btn" id="lastPage" aria-label="Last page" title="Last page (End)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16,17 21,12 16,7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                    </button>
+                    <button class="control-btn action-btn" id="fullscreen" aria-label="Fullscreen" title="Fullscreen (F11)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            
         </div>
 
         <!-- Touch Instructions (Mobile) -->
